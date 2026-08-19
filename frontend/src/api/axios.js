@@ -34,7 +34,7 @@ api.interceptors.response.use(
         // Request new token
         const res = await axios.post(
           // "https://mockly-backend.onrender.com/api/auth/newAccessToken",
-          "http://localhost:3000/api/auth/newAccessToken",
+          // "http://localhost:3000/api/auth/newAccessToken",
           {},
           { withCredentials: true }
         );

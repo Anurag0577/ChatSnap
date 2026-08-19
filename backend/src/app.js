@@ -52,7 +52,7 @@ app.use(errorHandler);
 // once the db is connected then only the server start running
 connectDB()
 .then(() => {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server start listning on ${PORT} `)
 })
 })

@@ -1,4 +1,5 @@
 import Instagram from "@/plateform/Instagram";
+import Snapchat from "@/plateform/SnapChat";
 import WhatsApp from "@/plateform/WhatsApp";
 import usePreviewData from "@/stores/usePreviewStore";
 
@@ -17,6 +18,8 @@ export default function RenderPlatformUI() {
       return <Instagram sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar}  isHeaderFooterRendered={isHeaderFooterRendered} />;
     case "WhatsApp":
       return <WhatsApp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
+    case "Snapchat":
+      return <Snapchat receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
     default:
       return <WhatsApp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />; 
   }

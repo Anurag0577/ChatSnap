@@ -25,9 +25,9 @@ export default function PlatformDropdownBtn() {
   const handlePlatformChange = (value) => {
     const platformMap = {
       '1': 'Whatsapp',
-      '2': 'Instagram'
+      '2': 'Instagram',
       // '3': 'Telegram',
-      // '4': 'Snapchat',
+      '3': 'Snapchat',
       // '6': 'X.com'
     }
     updatePlatform(platformMap[value])
@@ -63,6 +63,14 @@ export default function PlatformDropdownBtn() {
                 height={10} />
               <span className="truncate">Instagram</span>
             </SelectItem>
+            <SelectItem value="3">
+              <img
+                className="size-5 rounded"
+                src={snapLogo}
+                width={20}
+                height={20} />
+              <span className="truncate">SnapChat</span>
+            </SelectItem>
             {/* <SelectItem value="3">
               <img
                 className="size-5 rounded"
@@ -70,14 +78,6 @@ export default function PlatformDropdownBtn() {
                 width={20}
                 height={20} />
               <span className="truncate">Telegram</span>
-            </SelectItem>
-            <SelectItem value="4">
-              <img
-                className="size-5 rounded"
-                src={snapLogo}
-                width={20}
-                height={20} />
-              <span className="truncate">SnapChat</span>
             </SelectItem>
             <SelectItem value="6">
               <img

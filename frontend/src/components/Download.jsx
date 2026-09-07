@@ -34,6 +34,7 @@ export default function Download() {
     };
 
     const sendData = async(data) => {
+        console.log('THIS IS DATA: ', data)
         const response = await api.post(
           '/preview/messages', 
           data, {

@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Whatsapp from '../Platforms-ui/whatsapp-ui.jsx';
+import Snapchat from "../Platforms-ui/snapchat-ui.jsx";
 import puppeteer from 'puppeteer';
 import Instagram from '../Platforms-ui/Instagram-ui.jsx';
 import twemoji from 'twemoji';
@@ -117,8 +118,12 @@ const previewData = asyncHandler(async (req, res) => {
         case 'whatsapp':
             platformComponent = <Whatsapp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} senderAvatar={senderAvatar} bgImg={bgImg} isHeaderFooterRendered={isHeaderFooterRendered}/>;
             break;
-        default:isDarkMode
+        case 'snapchat':
+            platformComponent = <Snapchat sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
+            break;
+        default:
             platformComponent = <Whatsapp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} senderAvatar={senderAvatar} bgImg={bgImg} isHeaderFooterRendered={isHeaderFooterRendered}/>;
+            break;
     }
 
     let componentHTML = ReactDOMServer.renderToString(

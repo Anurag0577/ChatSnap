@@ -8,7 +8,6 @@ import { IoMdMic } from "react-icons/io";
 import { PiSticker } from "react-icons/pi";
 
 export default function WhatsApp({receiver, receiverAvatar, messages, isHeaderFooterRendered}) {
-
     return(
         <>
             <div className=" chatbox-preview flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none" id="renderedUI-driver" >

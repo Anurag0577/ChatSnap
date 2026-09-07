@@ -1,6 +1,6 @@
 import axios from "axios";
 import useAuthStore from "@/stores/useAuthStore";
-const VITE_URL = import.meta.env.VITE_HTTP_URL;
+const VITE_URL = import.meta.env.BACKEND_HTTP_URL;
 
 const api = axios.create({ // creating an instance of axios
   // baseURL: "https://backend-old-wave-5882.fly.dev/api",

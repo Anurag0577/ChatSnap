@@ -1,6 +1,7 @@
 import Instagram from "@/plateform/Instagram";
 import Snapchat from "@/plateform/SnapChat";
 import WhatsApp from "@/plateform/WhatsApp";
+import ChatGPT from "@/plateform/ChatGPT";
 import usePreviewData from "@/stores/usePreviewStore";
 
 export default function RenderPlatformUI() {
@@ -13,14 +14,16 @@ export default function RenderPlatformUI() {
 
   console.log('this is in the renderPlateform', platform)
 
-  switch (platform) {
-    case "Instagram":
+  switch (platform?.toLowerCase()) {
+    case "instagram":
       return <Instagram sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar}  isHeaderFooterRendered={isHeaderFooterRendered} />;
-    case "WhatsApp":
+    case "whatsapp":
       return <WhatsApp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
-    case "Snapchat":
+    case "snapchat":
       return <Snapchat receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
+    case "chatgpt":
+      return <ChatGPT messages={messages} isHeaderFooterRendered={isHeaderFooterRendered} />;
     default:
-      return <WhatsApp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />; 
+      return <WhatsApp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
   }
 }

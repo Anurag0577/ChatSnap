@@ -43,23 +43,23 @@ export default function ChatGPT({ messages, isHeaderFooterRendered }) {
 
         <div className="flex flex-col flex-1 min-h-0 bg-[#fafafa] dark:bg-black">
           <ul className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth scrollbar-gutter-stable px-2.5 pt-3">
-            {messages.map((msg, index) => {
+            {(messages || []).map((msg, index) => {
               const gapClass = index === 0 ? '' : 'mt-6';
 
               return msg.sender === 'sender' ? (
                 <li key={index} className={`${gapClass} flex justify-end`}>
                   <div className="inline-block max-w-[73%] px-[11px] py-[9px] rounded-[18px] bg-[#ebf1ff] dark:bg-[#04045e]">
-                    <p className="whitespace-pre-wrap text-[13px] leading-[22px] text-black dark:text-white">
+                    <p className="whitespace-pre-wrap text-[13px] leading-[16px] text-black dark:text-white">
                       {msg.message}
                     </p>
                   </div>
                 </li>
               ) : (
                 <li key={index} className={`${gapClass} flex flex-col items-start`}>
-                  <p className="whitespace-pre-wrap text-[13px] leading-[22px] text-black dark:text-white">
+                  <p className="whitespace-pre-wrap text-[13px] leading-[16px] text-black dark:text-white">
                     {msg.message}
                   </p>
-                  <div className="flex items-center gap-x-[14px] mt-[22px] text-[#5d5d5d] dark:text-white">
+                  <div className="flex items-center gap-x-[14px] mt-[22px] text-[#5d5d5d] dark:text-gray-400">
                     <FiCopy size={14} />
                     <FiThumbsUp size={14} />
                     <FiThumbsDown size={14} />

@@ -4,6 +4,7 @@ import instagramLogo from "@/assets/Instagram.png"
 import telegramLogo from "@/assets/Telegram.webp"
 import xLogo from "@/assets/X.jpg"
 import snapLogo from "@/assets/SnapLogo.png"
+import { SiOpenai } from "react-icons/si"
 import { Label } from "@/components/ui/label"
 import usePreviewData from "@/stores/usePreviewStore"
 import {
@@ -26,21 +27,20 @@ export default function PlatformDropdownBtn() {
     const platformMap = {
       '1': 'Whatsapp',
       '2': 'Instagram',
-      // '3': 'Telegram',
       '3': 'Snapchat',
-      // '6': 'X.com'
+      '4': 'ChatGPT',
     }
     updatePlatform(platformMap[value])
   }
-  
+
   // console.log(platform)
-  
+
   return (
     <div className="*:not-first:mt-2" id="platformDropdownBtn-driver" >
       <Select defaultValue="1" onValueChange={handlePlatformChange}>
         <SelectTrigger
           id={id}
-          className="ps-2 [&>span]:flex [&>span]:items-center [&>span]:gap-2 [&>span_img]:shrink-0">
+          className="ps-2 [&>span]:flex [&>span]:items-center [&>span]:gap-2 [&>span_img]:shrink-0 [&>span_svg]:shrink-0">
           <SelectValue placeholder="Select framework" />
         </SelectTrigger>
         <SelectContent
@@ -70,6 +70,10 @@ export default function PlatformDropdownBtn() {
                 width={20}
                 height={20} />
               <span className="truncate">SnapChat</span>
+            </SelectItem>
+            <SelectItem value="4">
+              <SiOpenai className="size-5 shrink-0 text-black dark:text-white" />
+              <span className="truncate">ChatGPT</span>
             </SelectItem>
             {/* <SelectItem value="3">
               <img

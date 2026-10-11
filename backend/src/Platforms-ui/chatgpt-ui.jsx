@@ -25,7 +25,7 @@ function WaveIcon({ size = 18 }) {
 export default function ChatGPT({ messages, bgImg, isHeaderFooterRendered }) {
   return (
     <>
-      <div className="flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border border-gray-200 dark:border-gray-800 rounded-none bg-[#fafafa] dark:bg-black text-black dark:text-white">
+      <div className="chatbox-preview flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border border-gray-200 dark:border-gray-800 rounded-none bg-[#fafafa] dark:bg-black text-black dark:text-white">
         {/* Header */}
         {isHeaderFooterRendered && (
           <div className="flex justify-between items-center bg-[#fafafa] dark:bg-black px-2.5 pt-2.5 pb-1.5">
@@ -50,23 +50,23 @@ export default function ChatGPT({ messages, bgImg, isHeaderFooterRendered }) {
           }}
         >
           <ul className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth scrollbar-gutter-stable px-2.5 pt-3">
-            {messages.map((msg, index) => {
+            {(messages || []).map((msg, index) => {
               const gapClass = index === 0 ? '' : 'mt-6';
 
               return msg.sender === 'sender' ? (
                 <li key={index} className={`${gapClass} flex justify-end`}>
                   <div className="inline-block max-w-[73%] px-[11px] py-[9px] rounded-[18px] bg-[#ebf1ff] dark:bg-[#04045e]">
-                    <p className="whitespace-pre-wrap text-[13px] leading-[22px] text-black dark:text-white">
+                    <p className="whitespace-pre-wrap text-[12px] leading-[16px] text-black dark:text-white">
                       {msg.message}
                     </p>
                   </div>
                 </li>
               ) : (
                 <li key={index} className={`${gapClass} flex flex-col items-start`}>
-                  <p className="whitespace-pre-wrap text-[13px] leading-[22px] text-black dark:text-white">
+                  <p className="whitespace-pre-wrap text-[12px] leading-[16px] text-black dark:text-white">
                     {msg.message}
                   </p>
-                  <div className="flex items-center gap-x-[22px] mt-[22px] text-[#5d5d5d] dark:text-white">
+                  <div className="flex items-center gap-x-[14px] mt-[22px] text-[#5d5d5d] dark:text-gray-400">
                     <FiCopy size={14} />
                     <FiThumbsUp size={14} />
                     <FiThumbsDown size={14} />
@@ -81,11 +81,13 @@ export default function ChatGPT({ messages, bgImg, isHeaderFooterRendered }) {
 
           {/* Input bar */}
           {isHeaderFooterRendered && (
-            <div className="w-full flex items-center gap-x-1.5 px-2.5 pt-1.5 pb-2.5 bg-transparent">
+            <div className="w-full flex items-center gap-x-1.5 px-2.5 pt-1.5 pb-2.5 bg-[#fafafa] dark:bg-black">
               <div className="flex items-center gap-2 px-3 h-[40px] rounded-full bg-white dark:bg-[#262626] border border-transparent dark:border-[#3a3a3a] shadow-[0_1px_8px_rgba(0,0,0,0.06)] dark:shadow-none flex-1">
                 <FiPlus className="shrink-0 text-black dark:text-white" size={18} />
                 <div className="flex-1">
-                  <p className="text-[#8a8a8a] dark:text-[#9a9a9a] text-[13px]">Reply to ChatGPT</p>
+                  <p className="text-[#8a8a8a] dark:text-[#9a9a9a] text-[13px]">
+                    Reply to ChatGPT
+                  </p>
                 </div>
                 <FiMic className="shrink-0 text-black dark:text-white" size={16} />
                 <div className="flex justify-center items-center shrink-0 rounded-full bg-[#2f5bf2] h-[28px] w-[28px] text-white">

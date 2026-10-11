@@ -8,6 +8,7 @@ import Whatsapp from '../Platforms-ui/whatsapp-ui.jsx';
 import Snapchat from "../Platforms-ui/snapchat-ui.jsx";
 import puppeteer from 'puppeteer';
 import Instagram from '../Platforms-ui/Instagram-ui.jsx';
+import ChatGPT from '../Platforms-ui/chatgpt-ui.jsx';
 import twemoji from 'twemoji';
 import https from 'https';
 import { User } from "../Models/User.model.js";
@@ -105,7 +106,8 @@ function getBackgroundImage(platform, isDarkMode) {
 const previewData = asyncHandler(async (req, res) => {
     const { sender, receiver, messages, receiverAvatar, senderAvatar, platform, isDarkMode, isHeaderFooterRendered } = req.body;
 
-    if (!sender || !receiver || !messages) {
+    const isChatGPT = platform?.toLowerCase() === 'chatgpt';
+    if (!messages || (!isChatGPT && (!sender || !receiver))) {
         return res.status(401).send('Either sender, receiver or messages not found!')
     }
     const bgImg = getBackgroundImage(platform, isDarkMode);
@@ -120,6 +122,9 @@ const previewData = asyncHandler(async (req, res) => {
             break;
         case 'snapchat':
             platformComponent = <Snapchat sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} isHeaderFooterRendered={isHeaderFooterRendered} />;
+            break;
+        case 'chatgpt':
+            platformComponent = <ChatGPT messages={messages} isHeaderFooterRendered={isHeaderFooterRendered} />;
             break;
         default:
             platformComponent = <Whatsapp sender={sender} receiver={receiver} messages={messages} receiverAvatar={receiverAvatar} senderAvatar={senderAvatar} bgImg={bgImg} isHeaderFooterRendered={isHeaderFooterRendered}/>;
@@ -198,7 +203,7 @@ const previewData = asyncHandler(async (req, res) => {
         <head>
             <meta charset="UTF-8">
             <style>
-                @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
                 body, html {
                     font-family: 'Roboto', sans-serif;
                 }
@@ -210,6 +215,15 @@ const previewData = asyncHandler(async (req, res) => {
                     vertical-align: -0.125em !important;
                 }
                 ${TAILWIND_CSS_STRING}
+                .chatbox-preview,
+                .chatbox-preview *,
+                #whatsapp-root,
+                #whatsapp-root * {
+                    font-family: 'Roboto', sans-serif !important;
+                    font-optical-sizing: auto;
+                    letter-spacing: normal !important;
+                    word-spacing: normal;
+                }
             </style>
         </head>
         <body>

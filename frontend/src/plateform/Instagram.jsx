@@ -1,3 +1,4 @@
+import { useRef, useLayoutEffect, useCallback } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { LuPhone, LuVideo } from "react-icons/lu";
 import { RiFlag2Line } from "react-icons/ri";
@@ -7,7 +8,44 @@ import { HiOutlinePhoto } from "react-icons/hi2";
 import { PiStickerBold } from "react-icons/pi";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import InstagramAvatar from '../assets/instagramAvatar.jpeg'
+
+const SENDER_GRADIENT = 'linear-gradient(to bottom, #c607cc, #5850f9)';
+
 export default function Instagram({ receiver, receiverAvatar, messages }) {
+    const scrollRef = useRef(null);
+
+    // Instagram-style "screen-fixed" gradient for sender bubbles.
+    // The article uses `background-attachment: fixed`, which pins the gradient to the
+    // browser window. Here the chat lives inside a preview box, so we pin the gradient
+    // to the scroll container instead: every bubble gets a background as tall as the
+    // visible chat area, shifted up by the bubble's current offset inside that area.
+    const updateGradients = useCallback(() => {
+        const container = scrollRef.current;
+        if (!container) return;
+
+        const containerRect = container.getBoundingClientRect();
+        const bubbles = container.querySelectorAll('[data-gradient-bubble]');
+
+        bubbles.forEach((bubble) => {
+            const offsetTop = bubble.getBoundingClientRect().top - containerRect.top;
+            bubble.style.backgroundSize = `100% ${containerRect.height}px`;
+            bubble.style.backgroundPosition = `0px ${-offsetTop}px`;
+        });
+    }, []);
+
+    // Re-calculate when messages change and when the container is resized
+    useLayoutEffect(() => {
+        updateGradients();
+
+        const container = scrollRef.current;
+        if (!container) return;
+
+        const observer = new ResizeObserver(updateGradients);
+        observer.observe(container);
+
+        return () => observer.disconnect();
+    }, [messages, updateGradients]);
+
     return (
         <>
             <div className=" chatbox-preview instagram-container flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none bg-white dark:bg-black" id="renderedUI-driver"  >
@@ -37,7 +75,11 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
                     <div className="flex flex-col h-full min-h-0 justify-end">
 
                         {/* Scrollable messages section */}
-                        <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth scrollbar-gutter-stable px-2 py-3 min-h-[624px] md:min-h-0">
+                        <div
+                            ref={scrollRef}
+                            onScroll={updateGradients}
+                            className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth scrollbar-gutter-stable px-2 py-3 min-h-[624px] md:min-h-0"
+                        >
 
                             <ul>
                                 {messages.map((msg, index) => {
@@ -61,12 +103,15 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
 
                                         <li key={index} className={`${gapClass} flex justify-end`}>
                                             <div
-                                                className={`relative inline-block py-1 px-2 max-w-[60%] rounded-tl-[10px] rounded-bl-[10px]
-                                                    ${roundTop ? "rounded-tr-[10px]" : "rounded-tr-none"}
-                                                    ${roundBottom ? "rounded-br-[10px]" : "rounded-br-none"}`}
+                                                data-gradient-bubble
+                                                className={`relative inline-block py-2 px-2 max-w-[60%] rounded-tl-[15px] rounded-bl-[15px]
+                                                    ${roundTop ? "rounded-tr-[15px]" : "rounded-tr-none"}
+                                                    ${roundBottom ? "rounded-br-[15px]" : "rounded-br-none"}`}
 
                                                 style={{
-                                                    backgroundImage: 'linear-gradient(to bottom, #b117db, #614afa)'
+                                                    backgroundImage: SENDER_GRADIENT,
+                                                    backgroundRepeat: 'no-repeat',
+                                                    backgroundColor: '#614afa',
                                                 }}
                                             >
                                                 <p className="whitespace-pre-wrap text-xs text-white">
@@ -80,18 +125,18 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
                                             {showAvatar ? (
                                                 <img
                                                     src={(receiverAvatar === null) ? InstagramAvatar : receiverAvatar}
-                                                    className="h-4 w-4 rounded-full mb-1 ml-1"
+                                                    className="h-5 w-5 rounded-full mb-1 ml-1"
                                                 />
                                             ) : (
-                                                <div className="w-4 ml-1" />
+                                                <div className="w-5 ml-1" />
                                             )}
 
                                             <div
-                                                className={`relative inline-block px-2 py-1
+                                                className={`relative inline-block px-3 py-2
                                                     bg-[#eeefef] dark:bg-[#262726]
-                                                    max-w-[60%] rounded-tr-[10px] rounded-br-[10px]
-                                                    ${roundTop ? "rounded-tl-[10px]" : "rounded-tl-none"}
-                                                    ${roundBottom ? "rounded-bl-[10px]" : "rounded-bl-none"}`}
+                                                    max-w-[60%] rounded-tr-[15px] rounded-br-[15px]
+                                                    ${roundTop ? "rounded-tl-[15px]" : "rounded-tl-none"}
+                                                    ${roundBottom ? "rounded-bl-[15px]" : "rounded-bl-none"}`}
                                             >
                                                 <p className="whitespace-pre-wrap text-xs dark:text-white">
                                                     {msg.message}

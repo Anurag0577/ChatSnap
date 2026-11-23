@@ -10,7 +10,30 @@ import { PiSticker } from "react-icons/pi";
 export default function WhatsApp({ receiver, receiverAvatar, messages, isHeaderFooterRendered }) {
   return (
     <>
-      <div className=" chatbox-preview flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none" id="renderedUI-driver" >
+      <div className=" chatbox-preview flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none relative" id="renderedUI-driver" >
+        <style>{`
+          .chatbox-preview::before {
+            content: 'ChatSnap Preview' !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) rotate(-45deg) !important;
+            font-size: 56px !important;
+            font-weight: bold !important;
+            color: rgba(34, 197, 94, 0.2) !important;
+            pointer-events: none !important;
+            z-index: 10 !important;
+            white-space: nowrap !important;
+            font-family: Arial, sans-serif !important;
+            letter-spacing: 2px !important;
+            text-align: center !important;
+            width: 150% !important;
+            height: 150% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        `}</style>
         {isHeaderFooterRendered && (
           <div className="flex justify-between items-center bg-white dark:bg-black border-b border-gray-300 py-1 gap-x-2 px-2 dark:text-white dark:border-gray-700">
             <IoArrowBackSharp size={17} />
@@ -58,7 +81,7 @@ export default function WhatsApp({ receiver, receiverAvatar, messages, isHeaderF
               return msg.sender === 'sender' ? (
                 <li key={index} className={`${gapClass} flex justify-end items-center`}>
                   <div
-                    className={`relative inline-block py-1 px-2 mr-2.5 bg-[#d9fdd3] dark:bg-[#144d37] max-w-[60%] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] ${isSameSender ? 'rounded-tr-[10px]' : 'rounded-tr-none'}`}
+                    className={`relative inline-block py-1 px-2 mr-2.5 bg-[#d9fdd3] dark:bg-[#144d37] max-w-[80%] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] ${isSameSender ? 'rounded-tr-[10px]' : 'rounded-tr-none'}`}
                   >
                     <div
                       className="absolute w-3 h-5 bg-[#d9fdd3] dark:bg-[#144d37]"
@@ -96,7 +119,7 @@ export default function WhatsApp({ receiver, receiverAvatar, messages, isHeaderF
                 </li>
               ) : (
                 <li key={index} className={`${gapClass} flex justify-start items-center`}>
-                  <div className={`relative inline-block px-2 py-1 ml-2.5 bg-white dark:bg-[#20272b] max-w-[60%] rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] ${isSameSender ? 'rounded-tl-[10px]' : 'rounded-tl-none'}`}>
+                  <div className={`relative inline-block px-2 py-1 ml-2.5 bg-white dark:bg-[#20272b] max-w-[80%] rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] ${isSameSender ? 'rounded-tl-[10px]' : 'rounded-tl-none'}`}>
                     <div
                       className="absolute w-3 h-5 bg-white dark:bg-[#20272b]"
                       style={{

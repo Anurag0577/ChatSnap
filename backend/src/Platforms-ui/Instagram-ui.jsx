@@ -7,6 +7,7 @@ import { FiMic } from "react-icons/fi";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { PiStickerBold } from "react-icons/pi";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import Watermark from "./Watermark.jsx";
 
 // useLayoutEffect warns during server rendering, so fall back to useEffect there
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;

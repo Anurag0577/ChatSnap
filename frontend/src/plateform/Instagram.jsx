@@ -13,12 +13,6 @@ const SENDER_GRADIENT = 'linear-gradient(to bottom, #c607cc, #5850f9)';
 
 export default function Instagram({ receiver, receiverAvatar, messages }) {
     const scrollRef = useRef(null);
-
-    // Instagram-style "screen-fixed" gradient for sender bubbles.
-    // The article uses `background-attachment: fixed`, which pins the gradient to the
-    // browser window. Here the chat lives inside a preview box, so we pin the gradient
-    // to the scroll container instead: every bubble gets a background as tall as the
-    // visible chat area, shifted up by the bubble's current offset inside that area.
     const updateGradients = useCallback(() => {
         const container = scrollRef.current;
         if (!container) return;
@@ -33,7 +27,6 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
         });
     }, []);
 
-    // Re-calculate when messages change and when the container is resized
     useLayoutEffect(() => {
         updateGradients();
 
@@ -46,15 +39,36 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
         return () => observer.disconnect();
     }, [messages, updateGradients]);
 
-    return (
+        return (
         <>
-            <div className=" chatbox-preview instagram-container flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none bg-white dark:bg-black" id="renderedUI-driver"  >
-
-                {/* Header */}
+            <div className="chatbox-preview instagram-container relative flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none bg-white dark:bg-black" id="renderedUI-driver">
+                <style>{`
+                    .chatbox-preview::before {
+                        content: 'ChatSnap Preview' !important;
+                        position: absolute !important;
+                        top: 50% !important;
+                        left: 50% !important;
+                        transform: translate(-50%, -50%) rotate(-45deg) !important;
+                        font-size: 56px !important;
+                        font-weight: bold !important;
+                        color: rgba(34, 197, 94, 0.2) !important;
+                        pointer-events: none !important;
+                        z-index: 10 !important;
+                        white-space: nowrap !important;
+                        font-family: Arial, sans-serif !important;
+                        letter-spacing: 2px !important;
+                        text-align: center !important;
+                        width: 150% !important;
+                        height: 150% !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                `}</style>
+                
                 <div className="instagram-header flex items-center h-fit p-2">
                     <IoArrowBackOutline size={20} />
 
-                    {/* Receiver Info */}
                     <div className="flex-1 ml-7 flex content-center gap-3">
                         <img className="h-8 w-8 rounded-full" src={(receiverAvatar === null) ? InstagramAvatar : receiverAvatar} />
                         <div className="flex flex-col justify-center">
@@ -62,7 +76,6 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
                         </div>
                     </div>
 
-                    {/* Call Icons */}
                     <div className="flex gap-4 items-center">
                         <LuPhone size={16} />
                         <LuVideo size={20} />
@@ -70,11 +83,10 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
                     </div>
                 </div>
 
-                {/* Chat Body */}
                 <div className="instagram-chat flex-1 min-h-0">
                     <div className="flex flex-col h-full min-h-0 justify-end">
 
-                        {/* Scrollable messages section */}
+
                         <div
                             ref={scrollRef}
                             onScroll={updateGradients}

@@ -13,9 +13,6 @@ const COLOR_ME = "rgb(255,48,54)";
 
 export default function Snapchat({ receiver, receiverAvatar, messages, isHeaderFooterRendered }) {
 
-    // Merge consecutive messages from the same sender into a single group so
-    // they render under one name header and share one unbroken border,
-    // instead of each message getting its own separate bordered block.
     const groupedMessages = [];
     messages.forEach((msg) => {
         const lastGroup = groupedMessages[groupedMessages.length - 1];
@@ -26,9 +23,32 @@ export default function Snapchat({ receiver, receiverAvatar, messages, isHeaderF
         }
     });
 
-    return (
+        return (
         <>
-            <div className="chatbox-preview flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none" id="renderedUI-driver">
+            <div className="chatbox-preview relative flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border rounded-none" id="renderedUI-driver">
+                <style>{`
+                    .chatbox-preview::before {
+                        content: 'ChatSnap Preview' !important;
+                        position: absolute !important;
+                        top: 50% !important;
+                        left: 50% !important;
+                        transform: translate(-50%, -50%) rotate(-45deg) !important;
+                        font-size: 56px !important;
+                        font-weight: bold !important;
+                        color: rgba(34, 197, 94, 0.2) !important;
+                        pointer-events: none !important;
+                        z-index: 10 !important;
+                        white-space: nowrap !important;
+                        font-family: Arial, sans-serif !important;
+                        letter-spacing: 2px !important;
+                        text-align: center !important;
+                        width: 150% !important;
+                        height: 150% !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                `}</style>
 
                 {isHeaderFooterRendered && (
                     <div

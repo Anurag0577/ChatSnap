@@ -26,9 +26,32 @@ export default function ChatGPT({ messages, isHeaderFooterRendered }) {
   return (
     <>
       <div
-        className="chatbox-preview flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border border-gray-200 dark:border-gray-800 rounded-none bg-[#fafafa] dark:bg-black text-black dark:text-white"
+        className="chatbox-preview relative flex-1 min-h-0 flex flex-col mb-2 shadow-2xl border border-gray-200 dark:border-gray-800 rounded-none bg-[#fafafa] dark:bg-black text-black dark:text-white"
         id="renderedUI-driver"
       >
+        <style>{`
+          .chatbox-preview::before {
+            content: 'ChatSnap Preview' !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) rotate(-45deg) !important;
+            font-size: 56px !important;
+            font-weight: bold !important;
+            color: rgba(34, 197, 94, 0.2) !important;
+            pointer-events: none !important;
+            z-index: 10 !important;
+            white-space: nowrap !important;
+            font-family: Arial, sans-serif !important;
+            letter-spacing: 2px !important;
+            text-align: center !important;
+            width: 150% !important;
+            height: 150% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        `}</style>
         {isHeaderFooterRendered && (
           <div className="flex justify-between items-center bg-[#fafafa] dark:bg-black px-2.5 pt-2.5 pb-1.5">
             <div className="flex items-center justify-center w-[31px] h-[31px] rounded-full bg-white dark:bg-[#2b2b2b] border border-transparent dark:border-[#3a3a3a] shadow-[0_1px_6px_rgba(0,0,0,0.06)] dark:shadow-none text-black dark:text-white">

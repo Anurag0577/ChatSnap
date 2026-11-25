@@ -5,7 +5,7 @@ const api = axios.create({ // creating an instance of axios
   // baseURL: "https://backend-old-wave-5882.fly.dev/api",
   // baseURL: `${VITE_URL}/api`,
   // baseURL: "https://mockly-backend.onrender.com/api",
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://chatsnap-api.duckdns.org",
   withCredentials: true,
 });
 
@@ -37,7 +37,7 @@ api.interceptors.response.use(
         const res = await axios.post(
           // "https://mockly-backend.onrender.com/api/auth/newAccessToken",
           // "http://localhost:3000/api/auth/newAccessToken",
-          "http://localhost:3000/api/auth/newAccessToken",
+          "https://chatsnap-api.duckdns.org/api/auth/newAccessToken",
           // "https://backend-old-wave-5882.fly.dev/api/auth/newAccessToken",
           // `https://backend-old-wave-5882.fly.dev/api/auth/newAccessToken`,
           {},

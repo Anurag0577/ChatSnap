@@ -158,7 +158,7 @@ export default function InstagramExtra({ receiver, receiverAvatar, messages }) {
                                             <div
                                                 data-gradient-bubble
                                                 style={senderBubbleStyle}
-                                                className="relative inline-block py-1 px-2 max-w-[60%] max-h-[200px] overflow-y-auto rounded-tl-[10px] rounded-bl-[10px] "
+                                                className="relative inline-block py-1 px-2 min-w-[50px] max-w-[60%] max-h-[200px] overflow-y-auto rounded-tl-[10px] rounded-bl-[10px] "
                                             >
                                                 <p className="whitespace-pre-wrap text-[12px] text-white dark:text-white">
                                                     {msg.message}
@@ -181,7 +181,7 @@ export default function InstagramExtra({ receiver, receiverAvatar, messages }) {
 
                                             <div
                                                 style={receiverBubbleStyle}
-                                                className="relative inline-block px-2 py-1 bg-[#eeefef] dark:bg-[#262726] max-w-[60%] max-h-[200px] overflow-y-auto rounded-tr-[10px] rounded-br-[10px]"
+                                                className="relative inline-block px-2 py-1 bg-[#eeefef] dark:bg-[#262726] min-w-[50px] max-w-[60%] max-h-[200px] overflow-y-auto rounded-tr-[10px] rounded-br-[10px]"
                                             >
                                                 <p className="whitespace-pre-wrap text-[12px] dark:text-white">
                                                     {msg.message}

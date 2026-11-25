@@ -81,7 +81,7 @@ export default function WhatsApp({ receiver, receiverAvatar, messages, isHeaderF
               return msg.sender === 'sender' ? (
                 <li key={index} className={`${gapClass} flex justify-end items-center`}>
                   <div
-                    className={`relative inline-block py-1 px-2 mr-2.5 bg-[#d9fdd3] dark:bg-[#144d37] max-w-[80%] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] ${isSameSender ? 'rounded-tr-[10px]' : 'rounded-tr-none'}`}
+                    className={`relative inline-block py-1 px-2 mr-2.5 bg-[#d9fdd3] dark:bg-[#144d37] min-w-[50px] max-w-[80%] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] ${isSameSender ? 'rounded-tr-[10px]' : 'rounded-tr-none'}`}
                   >
                     <div
                       className="absolute w-3 h-5 bg-[#d9fdd3] dark:bg-[#144d37]"
@@ -119,7 +119,7 @@ export default function WhatsApp({ receiver, receiverAvatar, messages, isHeaderF
                 </li>
               ) : (
                 <li key={index} className={`${gapClass} flex justify-start items-center`}>
-                  <div className={`relative inline-block px-2 py-1 ml-2.5 bg-white dark:bg-[#20272b] max-w-[80%] rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] ${isSameSender ? 'rounded-tl-[10px]' : 'rounded-tl-none'}`}>
+                  <div className={`relative inline-block px-2 py-1 ml-2.5 bg-white dark:bg-[#20272b] min-w-[50px] max-w-[80%] rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] ${isSameSender ? 'rounded-tl-[10px]' : 'rounded-tl-none'}`}>
                     <div
                       className="absolute w-3 h-5 bg-white dark:bg-[#20272b]"
                       style={{

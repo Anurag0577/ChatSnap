@@ -116,7 +116,7 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
                                         <li key={index} className={`${gapClass} flex justify-end`}>
                                             <div
                                                 data-gradient-bubble
-                                                className={`relative inline-block py-2 px-2 max-w-[60%] rounded-tl-[15px] rounded-bl-[15px]
+                                                className={`relative inline-block py-2 px-2 min-w-[50px] max-w-[60%] rounded-tl-[15px] rounded-bl-[15px]
                                                     ${roundTop ? "rounded-tr-[15px]" : "rounded-tr-none"}
                                                     ${roundBottom ? "rounded-br-[15px]" : "rounded-br-none"}`}
 
@@ -146,7 +146,7 @@ export default function Instagram({ receiver, receiverAvatar, messages }) {
                                             <div
                                                 className={`relative inline-block px-3 py-2
                                                     bg-[#eeefef] dark:bg-[#262726]
-                                                    max-w-[60%] rounded-tr-[15px] rounded-br-[15px]
+                                                    min-w-[50px] max-w-[60%] rounded-tr-[15px] rounded-br-[15px]
                                                     ${roundTop ? "rounded-tl-[15px]" : "rounded-tl-none"}
                                                     ${roundBottom ? "rounded-bl-[15px]" : "rounded-bl-none"}`}
                                             >

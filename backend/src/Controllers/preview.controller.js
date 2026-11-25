@@ -227,7 +227,7 @@ const previewData = asyncHandler(async (req, res) => {
             </style>
         </head>
         <body>
-            <div id="whatsapp-root" style="display: inline-block;">
+            <div id="whatsapp-root" style="display: block; width: 375px;">
                 ${componentHTML}
             </div>
         </body>

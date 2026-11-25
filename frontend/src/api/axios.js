@@ -5,7 +5,7 @@ const api = axios.create({ // creating an instance of axios
   // baseURL: "https://backend-old-wave-5882.fly.dev/api",
   // baseURL: `${VITE_URL}/api`,
   // baseURL: "https://mockly-backend.onrender.com/api",
-  baseURL: "https://chatsnap-api.duckdns.org",
+  baseURL: "https://chatsnap-api.duckdns.org/api",
   withCredentials: true,
 });
 
